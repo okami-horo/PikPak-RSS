@@ -66,7 +66,7 @@
 
 Bangumi-PikPak 提供了简洁直观的图形界面，方便用户管理RSS订阅和配置PikPak账号。
 
-![UI界面](img/ui.png)
+![UI界面](https://raw.githubusercontent.com/YinBuLiao/Bangumi-PikPak/main/img/ui.png)
 
 ### 主要功能区域:
 
