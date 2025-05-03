@@ -2,7 +2,7 @@
 
 <p align="center">
     <img title="mikan project" src="https://mikanani.me/images/mikan-pic.png" alt="" width="10%">
-    <img title="pikpak" src="https://raw.githubusercontent.com/YinBuLiao/Bangumi-PikPak/main/img/pikpak.png">
+    <img title="pikpak" src="https://raw.githubusercontent.com/okami-horo/PikPak-RSS/main/img/pikpak.png">
 </p>
 
 ---
@@ -36,7 +36,7 @@
 
 可以通过 https://mypikpak.com/ 获取。
 
-![截图](https://raw.githubusercontent.com/YinBuLiao/Bangumi-PikPak/main/img/b5900bc5d4695980707fda98f5c3e84a.png)
+![截图](https://raw.githubusercontent.com/okami-horo/PikPak-RSS/main/img/b5900bc5d4695980707fda98f5c3e84a.png)
 
 ### RSS链接:
 
@@ -44,7 +44,7 @@
 
 蜜柑计划的 RSS 只记录了开始订阅番剧后更新的内容，并且 RSS 更新有些许延迟，请耐心等待。
 
-![截图](https://raw.githubusercontent.com/YinBuLiao/Bangumi-PikPak/main/img/781e0a53fdf5aa6a1ea44c291e98c012.png)
+![截图](https://raw.githubusercontent.com/okami-horo/PikPak-RSS/main/img/781e0a53fdf5aa6a1ea44c291e98c012.png)
 
 请注意，RSS 订阅的链接格式应为：https://mikanani.me/RSS/MyBangumi?token=xxx%3d%3d 。
 
@@ -66,7 +66,7 @@
 
 Bangumi-PikPak 提供了简洁直观的图形界面，方便用户管理RSS订阅和配置PikPak账号。
 
-![UI界面](https://raw.githubusercontent.com/YinBuLiao/Bangumi-PikPak/main/img/ui.png)
+![UI界面](https://raw.githubusercontent.com/okami-horo/PikPak-RSS/main/img/ui.png)
 
 ### 主要功能区域:
 
