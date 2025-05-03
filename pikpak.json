@@ -1,0 +1,19 @@
+{
+    "last_refresh_time": 1746244687.3422964,
+    "client_token": {
+        "username": "+8618601581057",
+        "password": "Tzw4147758.",
+        "encoded_token": "eyJhY2Nlc3NfdG9rZW4iOiAiZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkltSTRZV0UxWXpsakxXSXlNVFl0TkRVMlpDMWhOamhtTFdFMVpUazJNemd3TVRRMU55SjkuZXlKcGMzTWlPaUpvZEhSd2N6b3ZMM1Z6WlhJdWJYbHdhV3R3WVdzdVkyOXRJaXdpYzNWaUlqb2lXWEZHY0ZoNmEwNHRkMkYyYUZScFZTSXNJbUYxWkNJNklsbE9lRlE1ZHpkSFRXUlhka1ZQUzJFaUxDSmxlSEFpT2pFM05EWXlOakF3TnpZc0ltbGhkQ0k2TVRjME5qSTFNamczTml3aVlYUmZhR0Z6YUNJNkluSXVjRzE1YURBM1owVlROWEZrVmxKVVJuQlBibXRFVVNJc0luTmpiM0JsSWpvaWRYTmxjaUJ3WVc0Z2MzbHVZeUJ2Wm1ac2FXNWxJaXdpY0hKdmFtVmpkRjlwWkNJNklqSjNhM00xTm1Nek1XUmpPREJ6ZUcwMWNEa2lMQ0p0WlhSaElqcDdJbUVpT2lKM01FZzNaWGxTU0RGbFNtUkVaWFZIYVZkek0yVTVjaXMyVUhSdGRtRlZjbWwwY1c1dVpsbGtaaXQzUFNKOWZRLkI1NWlZNXFrRGZtdmRXcjRQbEt1d3BuSnVZWVdMYUtMYkVNLS1fXzZBWWUyUmc3cGQtWmdHai1TaU1zOTA3NzhWVmQxcFJDajgyVnJzR0k2Vm1pMHYyM1JtOFNQRzFiYXhuUTBZTWk2YkdWRVpQaC1nWDNtNE9zUlFKR0RfanNYX3RJSFltTlVkbVNsd3ZPQTdDdFFISUR1Y19mV05iQk9nc3pkUWpMbkp6c0pwZVFSNnlibS1USWloY2lLRFVYZDhndnlHS0dIdTR1OUlIRzYwdDlfNzBoeXpBSU40YUhLWXFobGtuenZtT213Wk9IcHlNZlJXMDRaaXlPR3VnZFQtYlJDSzRwT3NZcFROc0szTl9JV25xd2RXMC1vaG9hZjdIUlVKYm5Vd2Rqc0ZUVlduUC1MelY0ck1YTnpnSDkxeG9ZNjZTLWtjb05kZ3k5cGh6NklIZyIsICJyZWZyZXNoX3Rva2VuIjogIm9zLmtObEMxSDVhSjJnVnRFd0lnbXdjUTlpbDlSN0RzNFVMSkdsVlE5R3NvcldoQlh6S1ZCTjBVbzlFVXk2dyJ9",
+        "max_retries": 3,
+        "initial_backoff": 3.0,
+        "token_refresh_callback": null,
+        "token_refresh_callback_kwargs": {},
+        "access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI4YWE1YzljLWIyMTYtNDU2ZC1hNjhmLWE1ZTk2MzgwMTQ1NyJ9.eyJpc3MiOiJodHRwczovL3VzZXIubXlwaWtwYWsuY29tIiwic3ViIjoiWXFGcFh6a04td2F2aFRpVSIsImF1ZCI6IllOeFQ5dzdHTWRXdkVPS2EiLCJleHAiOjE3NDYyNjAwNzYsImlhdCI6MTc0NjI1Mjg3NiwiYXRfaGFzaCI6InIucG15aDA3Z0VTNXFkVlJURnBPbmtEUSIsInNjb3BlIjoidXNlciBwYW4gc3luYyBvZmZsaW5lIiwicHJvamVjdF9pZCI6IjJ3a3M1NmMzMWRjODBzeG01cDkiLCJtZXRhIjp7ImEiOiJ3MEg3ZXlSSDFlSmREZXVHaVdzM2U5cis2UHRtdmFVcml0cW5uZllkZit3PSJ9fQ.B55iY5qkDfmvdWr4PlKuwpnJuYYWLaKLbEM--__6AYe2Rg7pd-ZgGj-SiMs90778VVd1pRCj82VrsGI6Vmi0v23Rm8SPG1baxnQ0YMi6bGVEZPh-gX3m4OsRQJGD_jsX_tIHYmNUdmSlwvOA7CtQHIDuc_fWNbBOgszdQjLnJzsJpeQR6ybm-TIihciKDUXd8gvyGKGHu4u9IHG60t9_70hyzAIN4aHKYqhlknzvmOmwZOHpyMfRW04ZiyOGugdT-bRCK4pOsYpTNsK3N_IWnqwdW0-ohoaf7HRUJbnUwdjsFTVWnP-LzV4rMXNzgH91xoY66S-kcoNdgy9phz6IHg",
+        "refresh_token": "os.kNlC1H5aJ2gVtEwIgmwcQ9il9R7Ds4ULJGlVQ9GsorWhBXzKVBN0Uo9EUy6w",
+        "user_id": "YqFpXzkN-wavhTiU",
+        "device_id": "004e32686dbaf806ba0e5319068254c2",
+        "captcha_token": null,
+        "_path_id_cache": {},
+        "user_agent": null
+    }
+}
