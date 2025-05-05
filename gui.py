@@ -13,6 +13,8 @@ from io import StringIO
 
 # 导入核心功能模块
 import core
+# 导入版本信息
+from version import get_version_info
 
 # 创建自定义日志处理器，将日志发送到GUI界面
 class GUILogHandler(logging.Handler):
@@ -89,7 +91,7 @@ class BangumiPikPakGUI:
         self.status_label = ttk.Label(status_frame, text="就绪")
         self.status_label.pack(side=tk.LEFT)
         
-        self.version_label = ttk.Label(status_frame, text="v1.0.0")
+        self.version_label = ttk.Label(status_frame, text=get_version_info())
         self.version_label.pack(side=tk.RIGHT)
         
     def setup_settings_tab(self, parent):
@@ -532,8 +534,8 @@ class BangumiPikPakGUI:
     def run_once(self):
         """执行一次更新任务"""
         try:
-            # 初始化客户端
-            core.load_config()
+            # 不加载配置文件，而是使用当前内存中的配置
+            # 初始化客户端 - 注意不调用load_config()
             core.init_clients()
             
             # 执行一次主循环
