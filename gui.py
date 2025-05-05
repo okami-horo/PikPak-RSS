@@ -132,7 +132,7 @@ class BangumiPikPakGUI:
         
         # RSS链接列表 - 使用Treeview替代Listbox以支持多列显示
         columns = ("url", "tag")
-        self.rss_tree = ttk.Treeview(rss_container, columns=columns, show="headings", height=6)
+        self.rss_tree = ttk.Treeview(rss_container, columns=columns, show="headings", height=6, selectmode="extended")
         
         # 设置列标题
         self.rss_tree.heading("url", text="RSS链接")
@@ -254,33 +254,88 @@ class BangumiPikPakGUI:
         self.new_rss_var.set("")  # 清空输入框
         self.new_tag_var.set("")  # 清空标签
         logging.info(f"添加RSS链接: {rss_url} 标签: {rss_tag}")
+        
+        # 立即更新核心模块的RSS列表和标签
+        self.update_core_rss_list()
+        # 更新状态栏
+        self.status_label.config(text=f"已添加RSS链接，当前共有 {len(self.rss_tree.get_children())} 个RSS源")
     
     def remove_rss(self):
-        """从列表中移除选中的RSS链接"""
-        selected_item = self.rss_tree.selection()
-        if not selected_item:
+        """从列表中移除选中的RSS链接（支持多选）"""
+        selected_items = self.rss_tree.selection()
+        if not selected_items:
             messagebox.showinfo("提示", "请先选择要删除的RSS链接")
             return
+        
+        # 确认是否删除
+        count = len(selected_items)
+        if count > 1:
+            confirm = messagebox.askyesno("确认删除", f"确定要删除选中的 {count} 个RSS链接吗？")
+        else:
+            confirm = messagebox.askyesno("确认删除", "确定要删除选中的RSS链接吗？")
             
-        rss_url = self.rss_tree.item(selected_item, "values")[0]
-        self.rss_tree.delete(selected_item)
-        logging.info(f"移除RSS链接: {rss_url}")
+        if not confirm:
+            return
+            
+        # 记录删除的URL，用于日志
+        deleted_urls = []
+        for item in selected_items:
+            rss_url = self.rss_tree.item(item, "values")[0]
+            deleted_urls.append(rss_url)
+            
+        # 删除所有选中的项
+        for item in selected_items:
+            self.rss_tree.delete(item)
+            
+        # 立即更新核心模块的RSS列表和标签
+        self.update_core_rss_list()
+            
+        # 记录日志
+        if len(deleted_urls) > 1:
+            logging.info(f"批量移除 {len(deleted_urls)} 个RSS链接")
+        else:
+            logging.info(f"移除RSS链接: {deleted_urls[0]}")
+            
+        # 更新状态栏提示
+        self.status_label.config(text=f"已删除 {len(deleted_urls)} 个RSS链接")
     
     def edit_tag(self):
-        """编辑选中RSS链接的标签"""
-        selected_item = self.rss_tree.selection()
-        if not selected_item:
-            messagebox.showinfo("提示", "请先选择一个RSS链接")
+        """编辑选中RSS链接的标签（支持多选）"""
+        selected_items = self.rss_tree.selection()
+        if not selected_items:
+            messagebox.showinfo("提示", "请先选择一个或多个RSS链接")
             return
         
-        current_tag = self.rss_tree.item(selected_item, "values")[1]
-        
-        # 弹出输入框让用户输入新标签
-        new_tag = simpledialog.askstring("编辑标签", "请输入新标签:", initialvalue=current_tag)
-        if new_tag is not None:
-            # 更新标签
-            self.rss_tree.item(selected_item, values=(self.rss_tree.item(selected_item, "values")[0], new_tag))
-            logging.info(f"更新RSS链接标签: {new_tag}")
+        # 对于单个选择，显示当前标签
+        if len(selected_items) == 1:
+            current_tag = self.rss_tree.item(selected_items[0], "values")[1]
+            # 弹出输入框让用户输入新标签
+            new_tag = simpledialog.askstring("编辑标签", "请输入新标签:", initialvalue=current_tag)
+            if new_tag is not None:
+                # 更新标签
+                self.rss_tree.item(selected_items[0], values=(self.rss_tree.item(selected_items[0], "values")[0], new_tag))
+                logging.info(f"更新RSS链接标签: {new_tag}")
+                
+                # 立即更新核心模块的RSS列表和标签
+                self.update_core_rss_list()
+                
+                # 更新状态栏
+                self.status_label.config(text=f"已更新RSS链接标签")
+        else:
+            # 多选情况下，不显示当前标签
+            new_tag = simpledialog.askstring("批量编辑标签", f"请为选中的 {len(selected_items)} 个RSS链接设置新标签:")
+            if new_tag is not None:
+                # 批量更新所有选中项
+                for item in selected_items:
+                    rss_url = self.rss_tree.item(item, "values")[0]
+                    self.rss_tree.item(item, values=(rss_url, new_tag))
+                
+                # 立即更新核心模块的RSS列表和标签
+                self.update_core_rss_list()
+                
+                logging.info(f"已批量更新 {len(selected_items)} 个RSS链接的标签为: {new_tag}")
+                # 更新状态栏
+                self.status_label.config(text=f"已更新 {len(selected_items)} 个RSS链接的标签")
     
     def load_config(self):
         """从配置文件加载设置"""
@@ -437,10 +492,38 @@ class BangumiPikPakGUI:
         if self.is_running:
             messagebox.showinfo("提示", "服务正在运行中，请等待当前任务完成")
             return
-            
-        if not os.path.exists(core.CONFIG_FILE):
-            messagebox.showwarning("提示", "请先保存配置")
+         
+        # 先确保核心模块的RSS列表是最新的
+        self.update_core_rss_list()
+        
+        # 验证是否有RSS源
+        if not core.RSS:
+            messagebox.showwarning("提示", "请至少添加一个RSS链接")
             return
+            
+        # 获取其他必要设置
+        username = self.username_var.get().strip()
+        password = self.password_var.get().strip()
+        folder_id = self.folder_id_var.get().strip()
+        
+        # 验证必填字段
+        if not username or not password or not folder_id:
+            messagebox.showwarning("提示", "请填写必要的账号信息(用户名、密码和文件夹ID)")
+            return
+            
+        # 更新核心模块的账户信息
+        core.USER[0] = username
+        core.PASSWORD[0] = password
+        core.PATH[0] = folder_id
+        
+        # 确保配置文件存在
+        if not os.path.exists(core.CONFIG_FILE):
+            try:
+                # 先保存一次配置
+                core.update_config()
+            except Exception as e:
+                messagebox.showwarning("提示", f"无法保存配置: {str(e)}")
+                return
             
         # 启动一次性任务
         threading.Thread(target=self.run_once, daemon=True).start()
@@ -505,6 +588,35 @@ class BangumiPikPakGUI:
                 messagebox.showinfo("提示", f"日志已保存到 {file_path}")
             except Exception as e:
                 messagebox.showerror("错误", f"保存日志失败: {str(e)}")
+    
+    def update_core_rss_list(self):
+        """从当前UI更新核心模块的RSS列表和标签
+        
+        此方法会收集界面上的RSS链接和标签，并更新core模块中的全局变量，
+        使修改立即对更新逻辑生效，无需点击保存设置按钮
+        """
+        # 获取所有RSS链接和对应的标签
+        rss_links = []
+        rss_tags = {}
+        
+        for item in self.rss_tree.get_children():
+            values = self.rss_tree.item(item, "values")
+            rss_url = values[0]
+            tag = values[1]
+            
+            rss_links.append(rss_url)  # 保存链接
+            if tag:  # 只保存非空标签
+                rss_tags[rss_url] = tag  # 保存标签
+        
+        # 更新核心模块的全局变量
+        core.RSS = rss_links
+        core.RSS_TAGS = rss_tags
+        
+        # 输出日志
+        logging.debug(f"实时更新: RSS链接数量 {len(rss_links)}, 有标签的RSS数量 {len(rss_tags)}")
+        
+        # 注意：这里只更新RSS相关的变量，不更新用户名密码等配置
+        # 也不写入配置文件，避免频繁IO操作
 
 def main_gui():
     root = tk.Tk()
